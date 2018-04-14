@@ -6,7 +6,11 @@
 
 
 import java.io.File;
+import java.util.List;
 
+import decisaocomatosdefala.model.Impressao;
+import decisaocomatosdefala.model.PontoDecisao;
+import decisaocomatosdefala.model.TicketsComMensagens;
 import decisaocomatosdefala.util.FileUtil;
 
 /**
@@ -16,7 +20,17 @@ import decisaocomatosdefala.util.FileUtil;
 public class Main {
 
     public static void main(String args[]) throws Exception{
-        FileUtil.execucaoDoArquivo("arquivos"+  File.separator +   "LogMessage.csv");
+
+    		List<TicketsComMensagens> ticketLimpos = FileUtil.loadTicketsFromFile("arquivos"+  File.separator +   "LogMessage.csv");
+
+        List<TicketsComMensagens> ticketsComVerbos = PontoDecisao.buscandoVerbosEmMensagens(ticketLimpos);
+
+        List<Impressao> decisoesEncontradas = FileUtil.extractDecisionPoints(ticketsComVerbos);
+
+        List<Impressao> mensagensAnteriores = FileUtil.listMensagensParaImpressao(ticketsComVerbos,
+				decisoesEncontradas);
+        
+        FileUtil.imprimeNaConsoleENoArquivo(decisoesEncontradas, mensagensAnteriores);
     }
 
 }

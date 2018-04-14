@@ -39,7 +39,7 @@ public class FileUtil {
 	    }
 
 
-	private static List<Impressao> listMensagensParaImpressao(List<TicketsComMensagens> ticketsComVerbos,
+	public static List<Impressao> listMensagensParaImpressao(List<TicketsComMensagens> ticketsComVerbos,
 																List<Impressao> decisoesEncontradas) {
 		List<Impressao> mensagensAnteriores = new ArrayList<>();
 		Impressao impressao = null;
@@ -75,7 +75,7 @@ public class FileUtil {
 		return mensagensAnteriores;
 	}
 
-	private static List<Impressao> extractDecisionPoints(List<TicketsComMensagens> ticketsComVerbos) {
+	public static List<Impressao> extractDecisionPoints(List<TicketsComMensagens> ticketsComVerbos) {
 		List<Impressao> decisoesEncontradas = new ArrayList<>();
 		for (TicketsComMensagens ticket : ticketsComVerbos) {
 		    for (Mensagem msg : ticket.getMensagens()) {
@@ -91,7 +91,7 @@ public class FileUtil {
 		return decisoesEncontradas;
 	}
 
-	private static List<TicketsComMensagens> loadTicketsFromFile(String caminho)
+	public static List<TicketsComMensagens> loadTicketsFromFile(String caminho)
 									throws FileNotFoundException, IOException, ParseException {
         //Leitura do Arquivo
 		List<TicketsComMensagens> tickets = new TicketsHelper().leituraDoArquivoCSV(caminho);
@@ -141,7 +141,7 @@ public class FileUtil {
 	}
 	
 
-	private static void imprimeNaConsoleENoArquivo(List<Impressao> decisoesEncontradas,
+	public static void imprimeNaConsoleENoArquivo(List<Impressao> decisoesEncontradas,
 													List<Impressao> mensagensAnteriores) throws IOException {
 		FileWriter writer = new FileWriter(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "resultadoLog.csv"));
 		System.out.println("PONTOS DE DECISÃO");

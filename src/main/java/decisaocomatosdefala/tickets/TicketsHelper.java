@@ -25,10 +25,11 @@ public class TicketsHelper {
 	        String linha = br.readLine();
 	        String[] colunas = linha.split(CSV_DIVISOR);
 
-	        TicketsComMensagens ticket = new TicketsComMensagens((colunas[1]));
-	        Mensagem mensagem = new Mensagem((colunas[0]), StopWords.removendoCaracter(colunas[2]));
+	        MessageFileDetail mdt = new MessageFileDetail(linha);
+	        TicketsComMensagens ticket = new TicketsComMensagens(mdt.getTicketId());
+	        Mensagem mensagem = mdt;
 	        List<Mensagem> mensagens = new ArrayList<Mensagem>();
-	        mensagens.add(mensagem);
+	        mensagens.add(mdt);
 	        
 	        List<TicketsComMensagens> tickets = new ArrayList<TicketsComMensagens>();
 	        
@@ -61,6 +62,29 @@ public class TicketsHelper {
 		InputStream fstream =  AtosDeFalaDecisao.class.getResourceAsStream(File.separator + caminho);
 		DataInputStream in = new DataInputStream(fstream);
 		return new BufferedReader(new InputStreamReader(in));
+	}
+	
+	
+	private class MessageFileDetail extends Mensagem {
+		
+		private String[] colunas;
+
+		public MessageFileDetail(String linha) {
+			colunas = linha.split(CSV_DIVISOR);
+		}
+		
+		public String getTicketId(){
+			return (colunas[1]);
+		}
+		
+		public String getMensagem() {
+			return StopWords.removendoCaracter(colunas[2]);
+		}
+		
+		public String getMsgId() {
+			return (colunas[0]);
+		}
+		
 	}
 	
 	 

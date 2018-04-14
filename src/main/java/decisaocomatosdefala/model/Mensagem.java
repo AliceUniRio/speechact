@@ -17,6 +17,8 @@ public class Mensagem {
     private String msgId;
     private String mensagem;
     private Date datahora;
+    private String de;
+    private String para;
     private List<Verbo> verbos;
 	
     
