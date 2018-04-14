@@ -18,22 +18,28 @@ public class PontoDecisao {
     
     public static TicketsComMensagens buscandoVerbosEmMensagens(TicketsComMensagens ticket) {
         List<Mensagem> mensagensComVerbos = new ArrayList<>();
+        for (Mensagem msg : ticket.getMensagens()) {
+        		insertVerbInMessage(mensagensComVerbos, msg);
+        }
         Mensagem msgNovo = null;
         TicketsComMensagens ticketNovo = null;
         ticketNovo = new TicketsComMensagens();
         ticketNovo.setTicketId(ticket.getTicketId());
-        for (Mensagem msg : ticket.getMensagens()) {
-            List<Verbo> verbos = new ArrayList<>();
-            verbos = buscandoVerbos(msg.getMensagem());
-            msgNovo = new Mensagem();
-            msgNovo.setMensagem(msg.getMensagem());
-            msgNovo.setMsgId(msg.getMsgId());
-            msgNovo.setVerbos(verbos);
-            mensagensComVerbos.add(msgNovo);
-        }
         ticketNovo.setMensagens(mensagensComVerbos);
         return ticketNovo;
     }
+
+
+	private static void insertVerbInMessage(List<Mensagem> mensagensComVerbos, Mensagem msg) {
+		Mensagem msgNovo;
+		List<Verbo> verbos;
+		verbos = buscandoVerbos(msg.getMensagem());
+		msgNovo = new Mensagem();
+		msgNovo.setMensagem(msg.getMensagem());
+		msgNovo.setMsgId(msg.getMsgId());
+		msgNovo.setVerbos(verbos);
+		mensagensComVerbos.add(msgNovo);
+	}
 	
     public static List<TicketsComMensagens> buscandoVerbosEmMensagens(List<TicketsComMensagens> tickets) {
         List<TicketsComMensagens> ticketsComVerbos = new ArrayList<>();
@@ -43,19 +49,10 @@ public class PontoDecisao {
         
         for (TicketsComMensagens ticket : tickets) {
             ticketNovo = new TicketsComMensagens();
-            ticketNovo.setTicketId(ticket.getTicketId());
-            
             for (Mensagem msg : ticket.getMensagens()) {
-                List<Verbo> verbos = new ArrayList<>();
-                
-                verbos = buscandoVerbos(msg.getMensagem());
-                
-                msgNovo = new Mensagem();
-                msgNovo.setMensagem(msg.getMensagem());
-                msgNovo.setMsgId(msg.getMsgId());
-                msgNovo.setVerbos(verbos);
-                mensagensComVerbos.add(msgNovo);
+            	insertVerbInMessage(mensagensComVerbos, msg);
             }
+            ticketNovo.setTicketId(ticket.getTicketId());
             ticketNovo.setMensagens(mensagensComVerbos);
             ticketsComVerbos.add(ticketNovo);
             mensagensComVerbos = new ArrayList<>();

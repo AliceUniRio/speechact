@@ -61,15 +61,15 @@ public class TicketsHelper {
 		}
 
 		public String getTicketId() {
-			return (colunas[1]); //0
+			return (colunas[0]); //0 1
 		}
 
 		public String getMensagem() {
-			return StopWords.removendoCaracter(colunas[2]);//5
+			return StopWords.removendoCaracter(colunas[5]);//5 2
 		}
 
 		public String getMsgId() {
-			return (colunas[0]);//1
+			return (colunas[1]);//1 0
 		}
 		
 		@Override
