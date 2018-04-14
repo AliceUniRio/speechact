@@ -8,8 +8,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import decisaocomatosdefala.execucao.AtosDeFalaDecisao;
 import decisaocomatosdefala.model.Mensagem;
@@ -18,74 +22,67 @@ import decisaocomatosdefala.nlp.StopWords;
 
 public class TicketsHelper {
 
-	 private final static String CSV_DIVISOR = ";";
+	private final static String CSV_DIVISOR = ";";
 
-	 public List<TicketsComMensagens> leituraDoArquivoCSV(String caminho) throws FileNotFoundException, IOException, ParseException {
-		 	BufferedReader br = getBufferedReaderFrom(caminho);
-	        String linha = br.readLine();
-	        String[] colunas = linha.split(CSV_DIVISOR);
-
-	        MessageFileDetail mdt = new MessageFileDetail(linha);
-	        TicketsComMensagens ticket = new TicketsComMensagens(mdt.getTicketId());
-	        Mensagem mensagem = mdt;
-	        List<Mensagem> mensagens = new ArrayList<Mensagem>();
-	        mensagens.add(mdt);
-	        
-	        List<TicketsComMensagens> tickets = new ArrayList<TicketsComMensagens>();
-	        
-	        while ((linha = br.readLine()) != null) {
-	            try {
-	                colunas = linha.split(CSV_DIVISOR);
-	                if (colunas.length > 1 && !colunas[1].equals(ticket.getTicketId().toString())) {
-	                    ticket.setMensagens(mensagens);
-	                    tickets.add(ticket);
-	                    ticket = new TicketsComMensagens();
-	                    ticket.setTicketId((colunas[1]));
-	                    mensagens = new ArrayList<Mensagem>();
-	                }
-	                mensagem = new Mensagem();
-	                mensagem.setMsgId((colunas[0]));
-	                if(colunas.length > 2){
-	                		mensagem.setMensagem(StopWords.removendoCaracter(colunas[2]));
-	                		mensagens.add(mensagem);
-	                }
-	            } catch (Exception e) {
-	            		System.out.println("Erro ao recuperar tickets do arquivo: " + e.getMessage());
-	            }
-	        }
-	        ticket.setMensagens(mensagens);
-	        tickets.add(ticket);
-	        return tickets;
-	    }
+	public List<TicketsComMensagens> leituraDoArquivoCSV(String caminho) throws FileNotFoundException, IOException, ParseException {
+		BufferedReader br = getBufferedReaderFrom(caminho);
+		Map<String, TicketsComMensagens> ticketRepository = new TreeMap<String, TicketsComMensagens>();
+		String linha = null;
+		
+		while ((linha = br.readLine()) != null) {
+			try {
+				MessageFileDetail mfd = new MessageFileDetail(linha);
+				if(ticketRepository.get(mfd.getTicketId()) == null){
+					TicketsComMensagens ticket = new TicketsComMensagens(mfd.getTicketId());
+					ticket.adicionarMensagem(mfd);
+					ticketRepository.put(mfd.getTicketId(), ticket);
+				}else{ 
+					ticketRepository.get(mfd.getTicketId()).adicionarMensagem(mfd);
+				}
+			} catch (Exception e) {
+				System.out.println("Erro ao recuperar tickets do arquivo: "+ e.getMessage());
+			}
+		}
+		return new ArrayList<TicketsComMensagens>(ticketRepository.values());
+	}
 
 	private BufferedReader getBufferedReaderFrom(String caminho) {
-		InputStream fstream =  AtosDeFalaDecisao.class.getResourceAsStream(File.separator + caminho);
+		InputStream fstream = AtosDeFalaDecisao.class.getResourceAsStream(File.separator + caminho);
 		DataInputStream in = new DataInputStream(fstream);
 		return new BufferedReader(new InputStreamReader(in));
 	}
-	
-	
+
 	private class MessageFileDetail extends Mensagem {
-		
+
 		private String[] colunas;
 
 		public MessageFileDetail(String linha) {
 			colunas = linha.split(CSV_DIVISOR);
 		}
-		
-		public String getTicketId(){
-			return (colunas[1]);
+
+		public String getTicketId() {
+			return (colunas[1]); //0
 		}
-		
+
 		public String getMensagem() {
-			return StopWords.removendoCaracter(colunas[2]);
+			return StopWords.removendoCaracter(colunas[2]);//5
 		}
-		
+
 		public String getMsgId() {
-			return (colunas[0]);
+			return (colunas[0]);//1
 		}
 		
+		@Override
+		public Date getDatahora() {
+			SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy HH:MM");
+			try {
+				return sdf.parse(colunas[2]);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+
 	}
-	
-	 
+
 }
