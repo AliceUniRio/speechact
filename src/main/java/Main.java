@@ -21,7 +21,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception{
 
-    		List<TicketsComMensagens> ticketLimpos = FileUtil.loadTicketsFromFile("arquivos"+  File.separator +   "LogMessage.csv");
+    		List<TicketsComMensagens> ticketLimpos = FileUtil.loadTicketsFromFile("arquivos"+  File.separator +   "LogMessage.csv");//Dataset01.csv
 
         List<TicketsComMensagens> ticketsComVerbos = PontoDecisao.buscandoVerbosEmMensagens(ticketLimpos);
 
