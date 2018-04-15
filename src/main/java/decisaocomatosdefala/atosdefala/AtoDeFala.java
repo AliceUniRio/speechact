@@ -11,11 +11,15 @@ public abstract class AtoDeFala implements IAtoDeFala {
 
     protected String mensagem;
     protected String[] verbos;
-    protected POSTaggerME tagger;
+    protected static POSTaggerME tagger;
+    
+    static {
+    		POSModel model = new POSModelLoader().load(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "en-pos-maxent.bin" ));// /lib/en-pos-maxent.bin"));
+        tagger = new POSTaggerME(model);
+    }
     
 	public AtoDeFala() {
-		POSModel model = new POSModelLoader().load(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "en-pos-maxent.bin" ));// /lib/en-pos-maxent.bin"));
-        tagger = new POSTaggerME(model);
+	
 	}
 
 	public AtoDeFala(String mensagem, String[] verbos) {

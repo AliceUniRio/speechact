@@ -1,15 +1,10 @@
 package decisaocomatosdefala.atosdefala;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import decisaocomatosdefala.model.Modelo;
 import decisaocomatosdefala.nlp.InfinitivoHelper;
-import decisaocomatosdefala.util.FileUtil;
-import opennlp.tools.cmdline.postag.POSModelLoader;
-import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.tokenize.WhitespaceTokenizer;
 
 public class Advisory extends AtoDeFala {
@@ -45,7 +40,6 @@ ii. the intention thatH take S's belief as (sufficient) reason for him toA.
         for (int i = 0; i < tokens.length; i++) {
             for (int s = 0; s < sujeito.length; s++) {
                 if (tags[i].equals(sujeito[s])) {
-
                     modelo = new Modelo();
                     modelo.setConteudo(tokens[i]);
                     modelo.setTag(tags[i]);

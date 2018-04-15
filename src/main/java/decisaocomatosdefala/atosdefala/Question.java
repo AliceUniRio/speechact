@@ -1,15 +1,10 @@
 package decisaocomatosdefala.atosdefala;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import decisaocomatosdefala.model.Modelo;
 import decisaocomatosdefala.nlp.InfinitivoHelper;
-import decisaocomatosdefala.util.FileUtil;
-import opennlp.tools.cmdline.postag.POSModelLoader;
-import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.tokenize.WhitespaceTokenizer;
 
 public class Question extends AtoDeFala {
@@ -27,8 +22,6 @@ i. the desire that H tell S whether or not P, and
 ii. the intention that H tell S whether or not P because of S's desire.
      */
     public  Boolean atoDeFalaQuestions() {
-        POSModel model = new POSModelLoader().load(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "en-pos-maxent.bin" ));//  /lib/en-pos-maxent.bin"));
-        POSTaggerME tagger = new POSTaggerME(model);
         String tokens[] = WhitespaceTokenizer.INSTANCE.tokenize(mensagem);
         String[] tags = tagger.tag(tokens);
         String[] sujeito = {"PRP"};

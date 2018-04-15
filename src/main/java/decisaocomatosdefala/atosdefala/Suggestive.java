@@ -1,15 +1,10 @@
 package decisaocomatosdefala.atosdefala;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import decisaocomatosdefala.model.Modelo;
 import decisaocomatosdefala.nlp.InfinitivoHelper;
-import decisaocomatosdefala.util.FileUtil;
-import opennlp.tools.cmdline.postag.POSModelLoader;
-import opennlp.tools.postag.POSModel;
-import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.tokenize.WhitespaceTokenizer;
 
 public class Suggestive extends AtoDeFala {
@@ -29,8 +24,6 @@ ii. the intention that H believe that there is reason, but not sufficient
 reason, to believe that P.
      */
     public  Boolean atoDeFalaSuggestives() {
-        POSModel model = new POSModelLoader().load(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "en-pos-maxent.bin" ));//  /lib/en-pos-maxent.bin"));
-        POSTaggerME tagger = new POSTaggerME(model);
         String tokens[] = WhitespaceTokenizer.INSTANCE.tokenize(mensagem);
         String[] tags = tagger.tag(tokens);
         String[] sujeito = {"PRP"};
