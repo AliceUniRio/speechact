@@ -3,7 +3,7 @@ package decisaocomatosdefala.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import decisaocomatosdefala.atosdefala.VerbosAtosFala;
+import decisaocomatosdefala.atosdefala.VerbosAtosFalaEnum;
 import decisaocomatosdefala.nlp.InfinitivoHelper;
 
 public class PontoDecisao {
@@ -66,7 +66,7 @@ public class PontoDecisao {
         Verbo verboItem = null;
         String verbo = mensagem.toLowerCase().trim();
         
-        for(VerbosAtosFala verbs : VerbosAtosFala.values()){
+        for(VerbosAtosFalaEnum verbs : VerbosAtosFalaEnum.values()){
 	        	for (String item : verbs.getValores()) {
 	        		String copyOfItem = item;
 	        		item = InfinitivoHelper.convertendoParaInfinitivo(item);
