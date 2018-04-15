@@ -46,7 +46,8 @@ public enum VerbosAtosFalaEnum {
 	
 	public Boolean isMessageAtoDeFala(String mensagem) {
 		atoDeFala.setVerbos(valores);
-		return isMessageAtoDeFala(mensagem);
+		atoDeFala.setMensagem(mensagem);
+		return atoDeFala.isMessageAtoDeFala();
 	}
 
 }

@@ -70,10 +70,11 @@ public class PontoDecisao {
 	        	for (String item : verbs.getValores()) {
 	        		String copyOfItem = item;
 	        		item = InfinitivoHelper.convertendoParaInfinitivo(item);
+	        		
 	        		if (item.equals("")) {
 	        			item = copyOfItem;
 	        		}
-	        		if (verbo.contains(item.trim().toLowerCase()) && Objects.equals(verbs.isMessageAtoDeFala(mensagem), Boolean.TRUE) ) {
+	        		if (verbo.contains(item.trim().toLowerCase()) && Objects.equals(verbs.isMessageAtoDeFala(mensagem), Boolean.TRUE)) {
 	        			verboItem = new Verbo(copyOfItem, verbs.toString());
 	        			verbos.add(verboItem);
 	        		}
