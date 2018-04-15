@@ -28,8 +28,6 @@ i. the belief that there is (sufficient) reason for H to A, and
 ii. the intention thatH take S's belief as (sufficient) reason for him toA.
      */
     public  Boolean atoDeFalaAdvisories() {
-        POSModel model = new POSModelLoader().load(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "en-pos-maxent.bin" ));// /lib/en-pos-maxent.bin"));
-        POSTaggerME tagger = new POSTaggerME(model);
         String tokens[] = WhitespaceTokenizer.INSTANCE.tokenize(mensagem);
         String[] tags = tagger.tag(tokens);
         String[] sujeito = {"PRP"};
