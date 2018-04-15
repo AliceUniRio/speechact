@@ -1,8 +1,7 @@
 package decisaocomatosdefala.atosdefala;
 
 public enum VerbosAtosFalaEnum {
-	
-	ASSERTIVE("assertive"  ,  new Assertive() ,new String[]{"affirm", "allege", "assert", "aver", "avow", "claim", "declare", "indicate", "maintain", "propound", "say", "state", "submit"} )
+		ASSERTIVE("assertive"  ,  new Assertive() ,new String[]{"affirm", "allege", "assert", "aver", "avow", "claim", "declare", "indicate", "maintain", "propound", "say", "state", "submit"} )
 	   ,PREDICTIVE ("predictive" , new Predictive()  ,new String[]{"forecast", "predict", "prophesy"})
 	   ,RETRODICTIVES ("retrodictives",new Retrodictive(), new String[] {"recount"})
 	   ,DESCRIPTIVES ("descriptives", new Descriptive() , new String[] {"call", "categorize", "characterize", "classify", "date", "describe", "diagnose", "evaluate", "grade", "identify", "portray", "rank"})
@@ -25,7 +24,7 @@ public enum VerbosAtosFalaEnum {
 	   , ADVISORIES ("advisories", new Advisory() ,new String[] {"admonish", "advise", "caution", "counsel", "propose", "recommend", "suggest", "urge", "warn"})
 	   , PROMISES ("promises", new Promisse() ,new String[] {"promise", "swear", "vow"})
 	   , OFFERS ("offers", new Offer() ,new String[] {"offer"})
-	   , DECISION ("decision", null ,new String[] {"close", "complete", "normalized", "solved", "agreed", "choosen", "conclude", "determine", "elect", "end", "establish", "rule", "select", "set", "vote", "detail", "diagnostic", "discrete", "procedure"});
+	   , DECISION ("decision", new Decision() ,new String[] {"close", "complete", "normalized", "solved", "agreed", "choosen", "conclude", "determine", "elect", "end", "establish", "rule", "select", "set", "vote", "detail", "diagnostic", "discrete", "procedure"});
 	   
 	   	private String nome;
 	   	private String[] valores;

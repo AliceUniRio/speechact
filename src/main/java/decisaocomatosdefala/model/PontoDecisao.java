@@ -2,6 +2,7 @@ package decisaocomatosdefala.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import decisaocomatosdefala.atosdefala.VerbosAtosFalaEnum;
 import decisaocomatosdefala.nlp.InfinitivoHelper;
@@ -44,7 +45,6 @@ public class PontoDecisao {
     public static List<TicketsComMensagens> buscandoVerbosEmMensagens(List<TicketsComMensagens> tickets) {
         List<TicketsComMensagens> ticketsComVerbos = new ArrayList<>();
         List<Mensagem> mensagensComVerbos = new ArrayList<>();
-        Mensagem msgNovo = null;
         TicketsComMensagens ticketNovo = null;
         
         for (TicketsComMensagens ticket : tickets) {
@@ -73,7 +73,7 @@ public class PontoDecisao {
 	        		if (item.equals("")) {
 	        			item = copyOfItem;
 	        		}
-	        		if (verbo.contains(item.trim().toLowerCase())) {
+	        		if (verbo.contains(item.trim().toLowerCase()) && Objects.equals(verbs.isMessageAtoDeFala(mensagem), Boolean.TRUE) ) {
 	        			verboItem = new Verbo(copyOfItem, verbs.toString());
 	        			verbos.add(verboItem);
 	        		}
