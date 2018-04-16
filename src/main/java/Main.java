@@ -27,8 +27,7 @@ public class Main {
 
         List<Impressao> decisoesEncontradas = FileUtil.extractDecisionPoints(ticketsComVerbos);
 
-        List<Impressao> mensagensAnteriores = FileUtil.listMensagensParaImpressao(ticketsComVerbos,
-				decisoesEncontradas);
+        List<Impressao> mensagensAnteriores = FileUtil.listMensagensParaImpressao(ticketsComVerbos, decisoesEncontradas);
         
         FileUtil.imprimeNaConsoleENoArquivo(decisoesEncontradas, mensagensAnteriores);
     }
