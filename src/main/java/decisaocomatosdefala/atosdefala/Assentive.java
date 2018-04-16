@@ -1,10 +1,5 @@
 package decisaocomatosdefala.atosdefala;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import decisaocomatosdefala.model.Modelo;
-import decisaocomatosdefala.nlp.InfinitivoHelper;
 import opennlp.tools.tokenize.WhitespaceTokenizer;
 
 public class Assentive extends AtoDeFala {
