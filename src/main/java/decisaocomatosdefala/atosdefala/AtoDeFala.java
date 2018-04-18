@@ -1,6 +1,7 @@
 package decisaocomatosdefala.atosdefala;
 
 import java.io.File;
+import java.util.Arrays;
 
 import decisaocomatosdefala.nlp.InfinitivoHelper;
 import decisaocomatosdefala.util.FileUtil;
@@ -34,6 +35,11 @@ public abstract class AtoDeFala implements IAtoDeFala {
 	
 
 	public Boolean searchTags(String tokens[], String[] tags, String[] target) {
+//		for(String x: target) {
+//			if( Arrays.asList(tags).contains(x)  ) {
+//				return true;
+//			}
+//		}
 		 for (int i = 0; i < tokens.length; i++) {
 	            for (int s = 0; s < target.length; s++) {
 	                if (tags[i].equals(target[s])) {

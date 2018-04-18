@@ -151,6 +151,9 @@ public class FileUtil {
 		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getMensagem() + "\";");
 		    writer.append(System.lineSeparator());
 		}
+		
+		System.out.println("");
+		System.out.println("");
 		System.out.println("Mensagens anteriores =" + mensagensAnteriores.size());
 		System.out.println("==========================================================================");
 		for (Impressao imp : mensagensAnteriores) {
@@ -158,7 +161,6 @@ public class FileUtil {
 		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem() + "\";");
 		    writer.append(System.lineSeparator());
 		}
-		System.out.println("==========================================================================");
 		writer.flush();
 		writer.close();
 	}

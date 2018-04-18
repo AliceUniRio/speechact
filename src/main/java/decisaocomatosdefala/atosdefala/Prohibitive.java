@@ -19,12 +19,23 @@ public class Prohibitive extends AtoDeFala {
     public  Boolean atoDeFalaProhibitive() {
         String tokens[] = WhitespaceTokenizer.INSTANCE.tokenize(mensagem);
         String[] tags = tagger.tag(tokens);
+        String[] preposicao = {"IN"};
         
         boolean achouSujeito =  searchTags(tokens, tags, new String[]{"PRP"});
 		boolean achouVerbo = searchTagsWithVerb(tokens, tags, new String[]{"VB", "VBD", "VBG", "VBZ"});
 		boolean achouPessoa = searchTags(tokens, tags, new String[]{"NN", "NNS", "NNP", "NNPS", "PRP"});;
 		boolean achouProibicao = searchTags(tokens, tags, new String[]{"VB", "VBD", "VBG"});
-		boolean achouPreposicao = searchTags(tokens, tags, new String[]{"IN"});
+		
+		boolean achouPreposicao = false;
+		 ext: for (int i = 0; i < tokens.length; i++) {
+	            for (int o = 0; o < preposicao.length; o++) {
+	                if (tags[i].equals(preposicao[o]) && tokens[i].equals("from")) {
+	                    achouPreposicao = true;
+	                    break ext;
+	                }
+	            }
+	        }
+		
         
         return (achouSujeito && achouVerbo && achouPessoa && achouProibicao && achouPreposicao);
     }

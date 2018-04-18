@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -73,14 +73,9 @@ public class TicketsHelper {
 		}
 		
 		@Override
-		public Date getDatahora() {
-			SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy HH:MM");
-			try {
-				return sdf.parse(colunas[2]);
-			} catch (ParseException e) {
-				e.printStackTrace();
-				return null;
-			}
+		public LocalDateTime getDatahora() {
+			DateTimeFormatter sdf = DateTimeFormatter.ofPattern("mm/dd/yyyy HH:MM");
+			return LocalDateTime.parse(colunas[2], sdf);
 		}
 
 	}

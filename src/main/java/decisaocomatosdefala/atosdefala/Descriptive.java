@@ -20,12 +20,25 @@ public class Descriptive extends AtoDeFala {
     public  Boolean atoDeFalaDescriptive() {
         String tokens[] = WhitespaceTokenizer.INSTANCE.tokenize(mensagem);
         String[] tags = tagger.tag(tokens);
+        String[] objeto = {"NN", "NNS", "NNP", "NNPS"};
         
         boolean achouSujeito =  searchTags(tokens, tags, new String[]{"PRP"});
 		boolean achouVerbo = searchTagsWithVerb(tokens, tags, new String[]{"VB", "VBD", "VBG", "VBZ"});
-		boolean achouObjeto = searchTags(tokens, tags, new String[]{"NN", "NNS", "NNP", "NNPS"});
 		boolean achouPreposicao = searchTags(tokens, tags, new String[]{"NN", "NNS", "NNP", "NNPS"});
 		boolean achouAdjetivo = searchTags(tokens, tags, new String[]{"JJ"});
+		
+		boolean achouObjeto = false;
+		 ext: for (int i = 0; i < tokens.length; i++) {
+	            for (int v = 0; v < objeto.length; v++) {
+	                if (tags[i].equals(objeto[v])) {
+	                    for (int in = 0; in < verbos.length; ) {
+	                        achouObjeto = true;
+	                        break ext;
+	                    }
+	                }
+	            }
+	      }
+		
 
         return (achouSujeito && achouVerbo && achouPreposicao && achouObjeto && achouAdjetivo );
     }

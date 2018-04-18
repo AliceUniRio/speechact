@@ -18,7 +18,9 @@ public class Requestive extends AtoDeFala {
 		
 		boolean achouSujeito =  searchTags(tokens, tags, new String[]{"PRP"});
 		boolean achouVerbo = searchTagsWithVerb(tokens, tags, new String[]{"VB", "VBD", "VBG", "VBZ"});
-		boolean achouPessoa = searchTags(tokens, tags, new String[]{"NN", "NNS", "NNP", "NNPS", "PRP"});;
+		boolean achouPessoa = searchTags(tokens, tags, new String[]{"NN", "NNS", "NNP", "NNPS", "PRP"});
+		
+		
 		
 		return  (achouSujeito && achouVerbo && achouPessoa );
 	}

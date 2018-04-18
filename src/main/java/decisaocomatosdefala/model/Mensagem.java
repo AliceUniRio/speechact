@@ -5,7 +5,7 @@
  */
 package decisaocomatosdefala.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ public class Mensagem {
 
     private String msgId;
     private String mensagem;
-    private Date datahora;
+    private LocalDateTime datahora;
     private String de;
     private String para;
     private List<Verbo> verbos;
@@ -34,14 +34,14 @@ public class Mensagem {
 	/**
      * @return the datahora
      */
-    public Date getDatahora() {
+    public LocalDateTime getDatahora() {
         return datahora;
     }
 
     /**
      * @param datahora the datahora to set
      */
-    public void setDatahora(Date datahora) {
+    public void setDatahora(LocalDateTime datahora) {
         this.datahora = datahora;
     }
 
