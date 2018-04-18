@@ -195,11 +195,11 @@ public class FileUtil {
 		
 		String ticket = "";
 		for (Impressao imp : decisoesEncontradas) {
+			if(!imp.getTicketId().equals(ticket) && !ticket.equals(""))
+				System.out.println("");
 		    System.out.println(sdf.format(imp.getDataHora()) + ";" +imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getDe() + ";" + imp.getPara() + ";" +  imp.getMensagem());
 		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getMensagem() + "\";");
 		    writer.append(System.lineSeparator());
-		    if(!imp.getTicketId().equals(ticket))
-		    		System.out.println("");
 		    ticket = imp.getTicketId();
 		}
 		
