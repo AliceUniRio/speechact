@@ -6,8 +6,7 @@
 
 
 import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import decisaocomatosdefala.model.Impressao;
@@ -27,11 +26,13 @@ public class Main {
 
         List<TicketsComMensagens> ticketsComVerbos = PontoDecisao.buscandoVerbosEmMensagens(ticketLimpos);
 
-        List<Impressao> decisoesEncontradas = FileUtil.extractDecisionPoints(ticketsComVerbos);
+//        List<Impressao> decisoesEncontradas = FileUtil.extractDecisionPoints(ticketsComVerbos);
 
-        List<Impressao> mensagensAnteriores = FileUtil.listMensagensParaImpressao(ticketsComVerbos, decisoesEncontradas);
+//        List<Impressao> mensagensAnteriores = FileUtil.listMensagensParaImpressao(ticketsComVerbos, decisoesEncontradas);
         
-        FileUtil.imprimeNaConsoleENoArquivo(decisoesEncontradas, mensagensAnteriores);
+//        FileUtil.imprimeNaConsoleENoArquivo(decisoesEncontradas, mensagensAnteriores);
+        List<Impressao> decisoesEncontradas = FileUtil.buildImpressaoFromTickets(ticketsComVerbos);
+        FileUtil.imprimeNaConsoleENoArquivoSeparaTicket(decisoesEncontradas, new ArrayList<>());
     }
 
 }

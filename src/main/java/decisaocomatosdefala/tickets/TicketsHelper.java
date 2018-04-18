@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -51,6 +51,13 @@ public class TicketsHelper {
 		DataInputStream in = new DataInputStream(fstream);
 		return new BufferedReader(new InputStreamReader(in));
 	}
+	
+	public static void main(String[] args) throws ParseException {
+		String data = "7/1/2015 08:40";
+		
+		 SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		 System.out.println(sdf2.parse(data));
+	}
 
 	private class MessageFileDetail extends Mensagem {
 
@@ -72,10 +79,26 @@ public class TicketsHelper {
 			return (colunas[1]);//1 0
 		}
 		
+		
 		@Override
-		public LocalDateTime getDatahora() {
-			DateTimeFormatter sdf = DateTimeFormatter.ofPattern("mm/dd/yyyy HH:MM");
-			return LocalDateTime.parse(colunas[2], sdf);
+		public String getDe() {
+			return colunas[3];
+		}
+
+		@Override
+		public String getPara() {
+			return colunas[4];
+		}
+		
+		@Override
+		public Date getDatahora() {
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+				return sdf.parse(colunas[2]);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 
 	}

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,22 @@ public class FileUtil {
 		return mensagensAnteriores;
 	}
 
+	public static List<Impressao> buildImpressaoFromTickets(List<TicketsComMensagens> ticketsComVerbos) {
+		List<Impressao> decisoesEncontradas = new ArrayList<>();
+		for (TicketsComMensagens ticket : ticketsComVerbos) {
+		    for (Mensagem msg : ticket.getMensagens()) {
+		        for (Verbo verbo : msg.getVerbos()) {
+		            Impressao impressao = null;
+	                impressao = new Impressao(ticket.getTicketId(), msg.getMsgId(), verbo.getVerbo(), verbo.getTipoVerbo(), msg.getMensagem(), msg.getDatahora());
+	                impressao.setDe(msg.getDe());
+	                impressao.setPara(msg.getPara());
+	                decisoesEncontradas.add(impressao);
+		        }
+		    }
+		}
+		return decisoesEncontradas;
+	}
+	
 	public static List<Impressao> extractDecisionPoints(List<TicketsComMensagens> ticketsComVerbos) {
 		List<Impressao> decisoesEncontradas = new ArrayList<>();
 		for (TicketsComMensagens ticket : ticketsComVerbos) {
@@ -146,8 +163,10 @@ public class FileUtil {
 		FileWriter writer = new FileWriter(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "resultadoLog.csv"));
 		System.out.println("PONTOS DE DECISÃO");
 		System.out.println("==========================================================================");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
 		for (Impressao imp : decisoesEncontradas) {
-		    System.out.println(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getMensagem());
+		    System.out.println(sdf.format(imp.getDataHora()) + ";" +imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getDe() + ";" + imp.getPara() + ";" +  imp.getMensagem());
 		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getMensagem() + "\";");
 		    writer.append(System.lineSeparator());
 		}
@@ -157,7 +176,39 @@ public class FileUtil {
 		System.out.println("Mensagens anteriores =" + mensagensAnteriores.size());
 		System.out.println("==========================================================================");
 		for (Impressao imp : mensagensAnteriores) {
-		    System.out.println(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem());
+		    System.out.println(sdf.format(imp.getDataHora()) + ";" +imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem());
+		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem() + "\";");
+		    writer.append(System.lineSeparator());
+		}
+		writer.flush();
+		writer.close();
+	}
+	
+	
+
+	public static void imprimeNaConsoleENoArquivoSeparaTicket(List<Impressao> decisoesEncontradas,
+													List<Impressao> mensagensAnteriores) throws IOException {
+		FileWriter writer = new FileWriter(FileUtil.loadFileFromResource("arquivos"+  File.separator +   "resultadoLog.csv"));
+		System.out.println("PONTOS DE DECISÃO");
+		System.out.println("==========================================================================");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		String ticket = "";
+		for (Impressao imp : decisoesEncontradas) {
+		    System.out.println(sdf.format(imp.getDataHora()) + ";" +imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getDe() + ";" + imp.getPara() + ";" +  imp.getMensagem());
+		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getVerbo() + ";" + imp.getTipoVerbo() + ";" + imp.getMensagem() + "\";");
+		    writer.append(System.lineSeparator());
+		    if(!imp.getTicketId().equals(ticket))
+		    		System.out.println("");
+		    ticket = imp.getTicketId();
+		}
+		
+		System.out.println("");
+		System.out.println("");
+		System.out.println("Mensagens anteriores =" + mensagensAnteriores.size());
+		System.out.println("==========================================================================");
+		for (Impressao imp : mensagensAnteriores) {
+		    System.out.println(sdf.format(imp.getDataHora()) + ";" +imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem());
 		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem() + "\";");
 		    writer.append(System.lineSeparator());
 		}

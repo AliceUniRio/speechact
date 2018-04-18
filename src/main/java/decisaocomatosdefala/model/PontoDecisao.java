@@ -38,7 +38,10 @@ public class PontoDecisao {
 		msgNovo = new Mensagem();
 		msgNovo.setMensagem(msg.getMensagem());
 		msgNovo.setMsgId(msg.getMsgId());
+		msgNovo.setDatahora(msg.getDatahora());
 		msgNovo.setVerbos(verbos);
+		msgNovo.setDe(msg.getDe());
+		msgNovo.setPara(msg.getPara());
 		mensagensComVerbos.add(msgNovo);
 	}
 	

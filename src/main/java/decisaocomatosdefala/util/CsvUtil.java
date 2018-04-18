@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,8 +27,8 @@ public class CsvUtil {
 	                String parte1Data = colunas[5].replaceAll("\"", "").substring(0, 16);
 	                String parte2Data = colunas[5].replaceAll("\"", "").substring(17, 20);
 	                String data = parte1Data + ":00.0" + parte2Data;
-	                Date dataHora = (DateUtil.converterStringParaDate(data));
-	                impressao = new Impressao(colunas[0].replaceAll("\"", ""), colunas[1].replaceAll("\"", ""), colunas[2].replaceAll("\"", ""), colunas[3].replaceAll("\"", ""), colunas[4].replaceAll("\"", ""), dataHora);
+//	                LocalDateTime dataHora = (DateUtil.converterStringParaDate(data));
+//	                impressao = new Impressao(colunas[0].replaceAll("\"", ""), colunas[1].replaceAll("\"", ""), colunas[2].replaceAll("\"", ""), colunas[3].replaceAll("\"", ""), colunas[4].replaceAll("\"", ""), dataHora);
 	                impressoes.add(impressao);
 	            } catch (Exception e) {
 

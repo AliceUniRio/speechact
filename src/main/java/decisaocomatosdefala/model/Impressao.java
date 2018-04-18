@@ -5,7 +5,6 @@
  */
 package decisaocomatosdefala.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -97,6 +96,8 @@ public class Impressao {
     private String msgId;
     private String verbo;
     private String mensagem;
+    private String de;
+    private String para;
     private String tipoVerbo;
     private Date dataHora;
 
@@ -113,5 +114,21 @@ public class Impressao {
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
+
+	public String getDe() {
+		return de;
+	}
+
+	public void setDe(String de) {
+		this.de = de;
+	}
+
+	public void setPara(String para) {
+		this.para = para;
+	}
+
+	public String getPara() {
+		return para;
+	}
 
 }
