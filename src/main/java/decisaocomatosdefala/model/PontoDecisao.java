@@ -63,6 +63,12 @@ public class PontoDecisao {
         return ticketsComVerbos;
     }
     
+    
+    /**
+     * Filet
+     * @param mensagem
+     * @return
+     */
     public static List<Verbo> buscandoVerbos(String mensagem) {
         List<Verbo> verbos = new ArrayList<Verbo>();
        

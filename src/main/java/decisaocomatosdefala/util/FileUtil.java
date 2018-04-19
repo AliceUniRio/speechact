@@ -171,15 +171,7 @@ public class FileUtil {
 		    writer.append(System.lineSeparator());
 		}
 		
-		System.out.println("");
-		System.out.println("");
-		System.out.println("Mensagens anteriores =" + mensagensAnteriores.size());
-		System.out.println("==========================================================================");
-		for (Impressao imp : mensagensAnteriores) {
-		    System.out.println(sdf.format(imp.getDataHora()) + ";" +imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem());
-		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem() + "\";");
-		    writer.append(System.lineSeparator());
-		}
+		mensagensAnteriores(mensagensAnteriores, writer, sdf);
 		writer.flush();
 		writer.close();
 	}
@@ -203,6 +195,17 @@ public class FileUtil {
 		    ticket = imp.getTicketId();
 		}
 		
+		if(mensagensAnteriores.size() > 0){
+			mensagensAnteriores(mensagensAnteriores, writer, sdf);
+		}
+		
+		writer.flush();
+		writer.close();
+	}
+
+
+	private static void mensagensAnteriores(List<Impressao> mensagensAnteriores,
+			FileWriter writer, SimpleDateFormat sdf) throws IOException {
 		System.out.println("");
 		System.out.println("");
 		System.out.println("Mensagens anteriores =" + mensagensAnteriores.size());
@@ -212,8 +215,6 @@ public class FileUtil {
 		    writer.append(imp.getTicketId() + ";" + imp.getMsgId() + ";" + imp.getTipoVerbo() + ";" + imp.getVerbo() + ";" + imp.getMensagem() + "\";");
 		    writer.append(System.lineSeparator());
 		}
-		writer.flush();
-		writer.close();
 	}
 	
 }
